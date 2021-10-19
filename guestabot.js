@@ -21,7 +21,7 @@ client.on('message', msg => {
             params = command.slice(9);
             risibankUrl = getRisibankRelated(params);
             msg.delete(100).then(msg => console.log(`Auto-deleted message from ${msg.author.username}`));
-            msg.channel.send('Params : ' + params, {
+            msg.channel.send('', {
                 file: risibankUrl
             });
         }
