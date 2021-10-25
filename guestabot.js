@@ -2,15 +2,23 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
-debug = false;
-discord_root_user = '116682911314345993';
-DISCORD_TOKEN = 'NDM0NTA5Mzk0NzMwOTQyNTA1.DbLcAQ.1YMKC_hsXDpcnz_lLyitQ7OI0_k';
+const config = require("./config.json");
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
+    client.user.setActivity(`Serving ${client.guilds.size} servers - commit n.` + lastID);
 });
-var prefix = '!!';
+client.on("guildCreate", guild => {
+    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
+    client.user.setActivity(`Serving ${client.guilds.size} servers`);
+});
+client.on("guildDelete", guild => {
+    console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
+    client.user.setActivity(`Serving ${client.guilds.size} servers`);
+});
+var prefix = config.prefix;
 client.on('message', msg => {
-    if(debug && msg.author.id != discord_root_user) {
+    if (message.author.bot) return;
+    if (config.debug && msg.author.id != config.root_user) {
         return;
     }
     if (command = isCommand(msg.content)) {
@@ -25,22 +33,29 @@ client.on('message', msg => {
                 file: risibankUrl
             });
         }
-        if(command.startsWith('prefix')) {
+        if (command.startsWith('prefix')) {
             msg.reply('Current prefix is *' + prefix + '*. To change it, please type `' + prefix + 'setprefix X` where X is the prefix');
         }
-        if(command.startsWith('setprefix')) {
+        if (command.startsWith('setprefix')) {
             params = command.slice(10);
             prefix = params;
             msg.reply('New prefix setted. Is now ' + prefix);
             console.log('prefix updated');
         }
-        if(command.startsWith('help') || command.startsWith('aled')) {
+        if (command.startsWith('help') || command.startsWith('aled')) {
             msg.reply("For now, some commands are available : help, aled, prefix, setprefix, risibank");
             msg.reply("The used prefix is " + prefix);
         }
+        if (command.startsWith('LE GANGE')) {
+            const fetched = await
+            message.channel.fetchMessages({limit: 500});
+            message.channel.bulkDelete(fetched)
+                .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+            msg.reply(":ok_hand: :grin:" + prefix).delete(500);
+        }
     }
 });
-client.login(DISCORD_TOKEN);
+client.login(config.token);
 function isCommand(msg) {
     prefixSize = prefix.length;
     candidat = msg.substr(0, prefixSize);
