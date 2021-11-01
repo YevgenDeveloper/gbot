@@ -17,7 +17,7 @@ client.on("guildDelete", guild => {
 });
 var prefix = config.prefix;
 client.on('message', msg => {
-    if (message.author.bot) return;
+    if (msg.author.bot) return;
     if (config.debug && msg.author.id != config.root_user) {
         return;
     }
