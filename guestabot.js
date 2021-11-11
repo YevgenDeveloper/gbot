@@ -46,7 +46,7 @@ client.on('message', msg => {
             msg.reply("For now, some commands are available : help, aled, prefix, setprefix, risibank");
             msg.reply("The used prefix is " + prefix);
         }
-        if (command.startsWith('LE GANGE')) {
+        if (command.startsWith('LEGANGE')) {
             const fetched = await
             message.channel.fetchMessages({limit: 500});
             message.channel.bulkDelete(fetched)
