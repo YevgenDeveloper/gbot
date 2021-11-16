@@ -47,10 +47,10 @@ client.on('message', msg => {
             msg.reply("The used prefix is " + prefix);
         }
         if (command.startsWith('LEGANGE')) {
-            const fetched = await message.channel.fetchMessages({limit: 500});
-            message.channel.bulkDelete(fetched)
+            const fetched = msg.channel.fetchMessages({limit: 500});
+            msg.channel.bulkDelete(fetched)
                 .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
-            msg.reply(":ok_hand: :grin:" + prefix).delete(500);
+            msg.reply(":ok_hand: :grin:").delete(500);
         }
     }
 });
