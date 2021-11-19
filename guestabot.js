@@ -18,7 +18,7 @@ client.on("guildDelete", guild => {
 });
 client.on('message',async msg => {
     if (msg.author.bot) return;
-    if(message.content.indexOf(config.prefix) !== 0) return;
+    if(msg.content.indexOf(config.prefix) !== 0) return;
     if (config.debug && msg.author.id != config.root_user) {
         return;
     }
@@ -48,9 +48,9 @@ client.on('message',async msg => {
             msg.reply("The used prefix is " + prefix);
         }
         if (command.startsWith('LEGANGE')) {
-            const fetched = await message.channel.fetchMessages({limit: 500});
-            message.channel.bulkDelete(fetched)
-                .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+            const fetched = await msg.channel.fetchMessages({limit: 500});
+            msg.channel.bulkDelete(fetched)
+                .catch(error => msg.reply(`Couldn't delete messages because of: ${error}`));
             msg.reply(":ok_hand: :grin:").delete(500);
         }
     }
