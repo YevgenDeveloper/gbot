@@ -48,10 +48,16 @@ client.on('message',async msg => {
             msg.reply("The used prefix is " + prefix);
         }
         if (command.startsWith('LEGANGE')) {
-            const fetched = await msg.channel.fetchMessages({limit: 100});
-            msg.channel.bulkDelete(fetched)
+            const fetched1 = await msg.channel.fetchMessages({limit: 100});
+            msg.channel.bulkDelete(fetched1)
                 .catch(error => msg.reply(`Couldn't delete messages because of: ${error}`));
-            msg.reply(":ok_hand: :grin:").delete(500);
+            const fetched2 = await msg.channel.fetchMessages({limit: 100});
+            msg.channel.bulkDelete(fetched2)
+                .catch(error => msg.reply(`Couldn't delete messages because of: ${error}`));
+            const fetched3 = await msg.channel.fetchMessages({limit: 100});
+            msg.channel.bulkDelete(fetched3)
+                .catch(error => msg.reply(`Couldn't delete messages because of: ${error}`));
+            msg.channel.send("Purifié par le GANGE :ok_hand: :grin:");
         }
     }
 });
