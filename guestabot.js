@@ -4,6 +4,7 @@ const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 const config = require("./config.json");
 var prefix = config.prefix;
+var admin_role_name = config.admin_role_name
 client.on('ready', () => {
     console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
@@ -85,7 +86,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function no_access(msg) {
-    if(!msg.member.roles.some(r=>["Administrator"].includes(r.name)) ) {
+    if(!msg.member.roles.some(r=>[admin_role_name].includes(r.name)) ) {
         msg.reply(":410: commande suicidée ! - Recommence et je te pète les jambes petit fdp.");
         return false;
     }
