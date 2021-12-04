@@ -36,7 +36,7 @@ client.on('message',async msg => {
             msg.reply('Pong!');
         }
         if (command.startsWith('bank')) {
-            subcommand = command.slide(6);
+            subcommand = command.slice(6);
             if(subcommand.startsWith('add')) {
                 var params = subcommand.slice(4);
                 var pic_url_idx = params.indexOf(' ');
