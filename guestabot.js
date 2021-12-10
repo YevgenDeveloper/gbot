@@ -27,7 +27,7 @@ client.on("guildDelete", guild => {
 });
 client.on('message', async msg => {
     if (msg.author.bot) return;
-    if(msg.content.indexOf("bot")) {
+    if(msg.content.indexOf("bot") !== 0) {
         msg.reply("Hmm ? Ça parle de moi ?");
     }
     if (msg.content.indexOf(config.prefix) !== 0) return;
