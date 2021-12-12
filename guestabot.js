@@ -27,8 +27,10 @@ client.on("guildDelete", guild => {
 });
 client.on('message', async msg => {
     if (msg.author.bot) return;
-    if(msg.content.indexOf("bot") !== 0) {
-        msg.reply("Hmm ? Ça parle de moi ?");
+    var troll_bot_idx = msg.content.indexOf("bot");
+    var troll_answers = ["Hmm ? Ça parle de moi ?", "T'as un soucis a parler de moi ? Tu veux que j'appelle Shlomo ?", "Trouve toi un pote frère, arrête de me citer comme ça..."];
+    if(troll_bot_idx > 0) {
+        msg.reply(troll_answers[Math.floor(Math.random()*troll_answers.length)]);
     }
     if (msg.content.indexOf(config.prefix) !== 0) return;
     if (config.debug && msg.author.id != config.root_user) {
