@@ -3,6 +3,7 @@
   "prefix"          : "+",
   "debug"           : false,
   "root_user"       : "116682911314345993",
-  "gange_lines"     : 10,
-  "admin_role_name" : "Daron"
+  "gange_lines"     : 1,
+  "admin_role_name" : "Daron",
+  "show_risitags"   : false
 }
