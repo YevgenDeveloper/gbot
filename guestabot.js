@@ -5,21 +5,10 @@ var rb = new Risibank.RisiBank();
 const jsdom = require("jsdom");
 const {JSDOM} = jsdom;
 const config = require("./config.json");
-const loki = require("lokijs");
-var db = new loki('risibank.db', {
-    autoload: true,
-    autoloadCallback: databaseInitialize,
-    autosave: true,
-    autosaveInterval: 60000
-});
 var prefix = config.prefix;
 var prefixSize = prefix.length;
 var admin_role_name = config.admin_role_name
 var risibank_show_tags = config.show_risitags;
-var guestabank = db.getCollection("guestabank");
-if (guestabank === null) {
-    guestabank = db.addCollection("guestabank");
-}
 client.on('ready', () => {
     console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
@@ -159,12 +148,6 @@ const getScript = (url) => {
         });
     });
 };
-function databaseInitialize() {
-    var guestabank = db.getCollection("guestabank");
-    if (guestabank === null) {
-        guestabank = db.addCollection("guestabank");
-    }
-}
 function removeCaller(msg, caller = '') {
     caller_log = caller.length ? ' [' + caller + '] ' : '';
     msg.delete(300).then(msg => console.log(`${caller} Auto-deleted message from ${msg.author.username}`));
