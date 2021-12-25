@@ -62,6 +62,7 @@ client.on('message', async msg => {
             msg.reply("Commande accessible : risibank <mot clés>");
             msg.channel.send("Commandes ADMIN : RISITAGS, LEGANGE, SETPREFIX");
             msg.channel.send("Le préfix actuellement est " + prefix);
+            msg.channel.send("Merci à la risibank (https:
         }
         if(command.startsWith('RISITAGS') && no_access(msg)) {
             if(risibank_show_tags) {
