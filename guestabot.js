@@ -59,7 +59,7 @@ client.on('message', async msg => {
             })
         }
         if (command.startsWith('help') || command.startsWith('aled')) {
-            msg.reply("Commande accessible : risibank <mot clés>");
+            msg.reply("Commandes accessibles : `credits`, `risibank <mot clés>`");
             msg.channel.send("Commandes ADMIN : RISITAGS, LEGANGE, SETPREFIX");
             msg.channel.send("Le préfix actuellement est " + prefix);
         }
