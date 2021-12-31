@@ -65,7 +65,7 @@ client.on('message', async msg => {
         }
         if(command.startsWith("credits")) {
             msg.channel.send("Merci à la risibank (https:
-            msg.channel.send("Dev par @BISOU MAGIQUE EN SPRAY#9153 avec les encouragements de @Ourx#4698");
+            msg.channel.send("Dev par poneygenial avec les encouragements de Ourx");
         }
         if(command.startsWith('RISITAGS') && no_access(msg)) {
             if(risibank_show_tags) {
