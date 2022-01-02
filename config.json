@@ -5,5 +5,6 @@
   "root_user"       : "116682911314345993",
   "gange_lines"     : 1,
   "admin_role_name" : "khey",
-  "show_risitags"   : false
+  "show_risitags"   : false,
+  "celestin"        : false
 }
