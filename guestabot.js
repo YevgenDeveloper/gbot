@@ -84,7 +84,7 @@ client.on('message', async msg => {
             }
         }
         if(command.startsWith('CELESTIN') && no_access(msg)) {
-            if(risibank_show_tags) {
+            if(risibank_celestin) {
                 risibank_celestin = false;
                 msg.channel.send("Ok, j'arrête d'afficher les Celestins :ok_hand: :grin:");
             } else {
