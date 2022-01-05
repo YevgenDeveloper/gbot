@@ -1,10 +1,12 @@
 {
-  "token"           : "NDg0MTI3ODU0MzI2NzEwMzAw.Dmdfgg.8v8evO3f6gGDQJX_Js52acgCt6M",
-  "prefix"          : "+",
-  "debug"           : false,
-  "root_user"       : "116682911314345993",
-  "gange_lines"     : 1,
-  "admin_role_name" : "khey",
-  "show_risitags"   : false,
-  "celestin"        : false
+  "token"                 : "NDg0MTI3ODU0MzI2NzEwMzAw.Dmdfgg.8v8evO3f6gGDQJX_Js52acgCt6M",
+  "prefix"                : "+",
+  "debug"                 : false,
+  "root_user"             : "116682911314345993",
+  "gange_lines"           : 1,
+  "admin_role_name"       : "khey",
+  "show_risitags"         : false,
+  "celestin"              : false,
+  "bot_presence"          : "rng",
+  "bot_presence_luck"     : 20
 }
