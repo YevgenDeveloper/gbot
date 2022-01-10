@@ -87,6 +87,9 @@ client.on('message', async msg => {
             msg.channel.send("Merci à la risibank (https:
             msg.channel.send("Dev par poneygenial avec les encouragements de Ourx");
         }
+        if (command.startsWith('stats')) {
+            msg.reply(`J'offre actuellement du bonheur à ${client.users.size} personnes a travers ${client.channels.size} channels de ${client.guilds.size} serveurs. Ouf hein ?! Merci !!`);
+        }
         if (command.startsWith('RISITAGS') && no_access(msg)) {
             if (risibank_show_tags) {
                 risibank_show_tags = false;
