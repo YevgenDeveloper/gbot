@@ -78,6 +78,11 @@ client.on('message', async msg => {
                 }
             })
         }
+        if(command.startsWith('invite')) {
+            msg.reply(`tu peux ajouter Gilbot chez toi en cliquant sur http:
+                {file: "http:
+        );
+        }
         if (command.startsWith('help') || command.startsWith('aled')) {
             msg.reply("Commandes accessibles : `credits`, `risibank <mot clés>`");
             msg.channel.send("Commandes ADMIN : RISITAGS, LEGANGE, SETPREFIX");
