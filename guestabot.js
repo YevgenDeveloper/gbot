@@ -84,8 +84,8 @@ client.on('message', async msg => {
         );
         }
         if (command.startsWith('help') || command.startsWith('aled')) {
-            msg.reply("Commandes accessibles : `credits`, `risibank <mot clés>`");
-            msg.channel.send("Commandes ADMIN : RISITAGS, LEGANGE, SETPREFIX");
+            msg.reply("Commandes accessibles : `credits`, `risibank <mot clés>`, `invite`, `stats`");
+            msg.channel.send("Commandes ADMIN (role `khey`) : `RISITAGS`, `LEGANGE`, `SETPREFIX`, `PRESENCE <on,off,rng<0-100>>`");
             msg.channel.send("Le préfix actuellement est " + prefix);
         }
         if (command.startsWith("credits")) {
