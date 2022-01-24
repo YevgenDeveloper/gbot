@@ -99,8 +99,8 @@ client.on('message', async msg => {
                 },
                 "fields": [
                     {
-                        "name": "\u200b",
-                        "value": `Actuellement, le préfix est ${prefix}, faut le savoir hein.`
+                        "name": `Actuellement, le préfix est ${prefix}, faut le savoir hein.`,
+                        "value": "\u200b"
                     },
                     {
                         "name": "risibank <mot clé>",
