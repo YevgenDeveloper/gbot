@@ -177,6 +177,52 @@ client.on('message', async msg => {
                 msg.channel.send("Ok, c'est parti pour afficher les Celestins :ok_hand: :grin:");
             }
         }
+        if(command.startsWith('ALED') && no_access(msg)) {
+            const embed = {
+                "title": "**ALEEEED ADMIN VERSOIN**",
+                "color": 16711680,
+                "footer": {
+                    "icon_url": "http:
+                    "text": "N'OUBLIE PAS, tu peux m'aider en allant voter"
+                },
+                "thumbnail": {
+                    "url": "http:
+                },
+                "fields": [
+                    {
+                        "name": "__:gear: SETPREFIX__",
+                        "value": "Permet de modifier le prefix du serveur (actuellement XX)"
+                    },
+                    {
+                        "name": "__:recycle: LEGANGE__",
+                        "value": "Supprime les 100 derniers messages datant de moins de 15 jours du salon"
+                    },
+                    {
+                        "name": "__:joy: RISITAGS__",
+                        "value": "Indique les mots clés utilisés pour chaque recherche dans la risibank"
+                    },
+                    {
+                        "name": "__:joy: CELESTIN__",
+                        "value": "Active ou désactive la citation de l'utilisateur du risibank"
+                    },
+                    {
+                        "name": "__:ghost: PRESENCE__",
+                        "value": "Permet de gérer les réponses automatiques du bot. PRESENCE prend 3 paramètres :"
+                    },
+                    {
+                        "name": "on/off",
+                        "value": "Active ou désactive les réponses automatiques au mot bot",
+                        "inline": true
+                    },
+                    {
+                        "name": "rng",
+                        "value": "suivit d'un nombre comprit entre 0 et 100 correspondant à la CHANCE qu'a le bot pour répondre",
+                        "inline": true
+                    }
+                ]
+            };
+            msg.channel.send({ embed });
+        }
         if (command.startsWith('SETPREFIX') && no_access(msg)) {
             params = command.slice(prefixSize + 9);
             prefix = params;
