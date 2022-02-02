@@ -13,4 +13,4 @@ stage_deploy:
     - master
   script:
     - ssh-add <(echo "$STAGING_PRIVATE_KEY")
-    - ssh -p22 benftwc@benftwc.fr "/var/www_node/guestabot/update.sh"
+    - ssh -p22 benftwc@benftwc.fr "cd /var/www_node/guestabot && /var/www_node/guestabot/update.sh"
