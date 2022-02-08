@@ -177,6 +177,12 @@ client.on('message', async msg => {
                 msg.channel.send("Ok, c'est parti pour afficher les Celestins :ok_hand: :grin:");
             }
         }
+        if(command.startsWith('SETSTATS') && no_access(msg)) {
+            if(risicount == 0)
+            let param = +command.slice(prefixSize + 8);
+            risicount = param;
+            msg.reply("Ok :ok_hand: :grin:");
+        }
         if(command.startsWith('ALED') && no_access(msg)) {
             const embed = {
                 "title": "**ALEEEED ADMIN VERSOIN**",
@@ -208,6 +214,10 @@ client.on('message', async msg => {
                     {
                         "name": "__:ghost: PRESENCE__",
                         "value": "Permet de gérer les réponses automatiques du bot. PRESENCE prend 3 paramètres :"
+                    },
+                    {
+                        "name": "__:thinking: SETSTATS__",
+                        "value": "Permet d'initialiser le compteur de risibank"
                     },
                     {
                         "name": "on/off",
