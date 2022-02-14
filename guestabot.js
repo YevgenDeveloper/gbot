@@ -179,7 +179,7 @@ client.on('message', async msg => {
         }
         if(command.startsWith('SETSTATS') && no_access(msg)) {
             if(risicount == 0)
-            let param = +command.slice(prefixSize + 8);
+            var param = +command.slice(prefixSize + 8);
             risicount = param;
             msg.reply("Ok :ok_hand: :grin:");
         }
