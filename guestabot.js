@@ -183,6 +183,9 @@ client.on('message', async msg => {
             risicount = param;
             msg.reply("Ok :ok_hand: :grin:");
         }
+        if(command.startWith('test')) {
+            msg.reply('test', {"file": 'http:
+        }
         if(command.startsWith('ALED') && no_access(msg)) {
             const embed = {
                 "title": "**ALEEEED ADMIN VERSOIN**",
