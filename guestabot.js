@@ -184,7 +184,13 @@ client.on('message', async msg => {
             msg.reply("Ok :ok_hand: :grin:");
         }
         if(command.startsWith('test')) {
-            msg.reply('test', {"file": 'http:
+            async function getStuff() {
+                return await readFile('http:
+            }
+            getStuff().then(function(data) {
+                console.log(data);
+                msg.reply('test', {"file": data})
+            })
         }
         if(command.startsWith('ALED') && no_access(msg)) {
             const embed = {
