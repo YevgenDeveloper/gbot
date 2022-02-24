@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const Risibank = require('risibank');
-var rb = new Risibank.RisiBank();
 const jsdom = require("jsdom");
-const {JSDOM} = jsdom;
 const config = require("./config.json");
+var rb = new Risibank.RisiBank();
+const client = new Discord.Client();
+const {JSDOM} = jsdom;
 var prefix = config.prefix;
 var prefixSize = prefix.length;
 var admin_role_name = config.admin_role_name
@@ -183,15 +183,6 @@ client.on('message', async msg => {
             risicount = param;
             msg.reply("Ok :ok_hand: :grin:");
         }
-        if(command.startsWith('test')) {
-            async function getStuff() {
-                return await readFile('http:
-            }
-            getStuff().then(function(data) {
-                console.log(data);
-                msg.reply('test', {"file": data})
-            })
-        }
         if(command.startsWith('ALED') && no_access(msg)) {
             const embed = {
                 "title": "**ALEEEED ADMIN VERSOIN**",
@@ -275,18 +266,6 @@ function isCommand(msg) {
     }
     return false;
 }
-function getRisibankRelated(search) {
-    if (search === 'random' || search === 'rng') {
-        rng = getRandomInt(201, 297);
-        return 'https:
-    }
-    (async (url) => {
-        code = await getScript(url);
-        dom = new JSDOM(code);
-        imageUrl = dom.window.document.querySelector(".risicard:first-child img").dataset.src;
-        return imageUrl;
-    })('https:
-}
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -297,27 +276,6 @@ function no_access(msg) {
     }
     return true;
 }
-const getScript = (url) => {
-    return new Promise((resolve, reject) => {
-        const http = require('http'),
-            https = require('https');
-        let client = http;
-        if (url.toString().indexOf("https") === 0) {
-            client = https;
-        }
-        client.get(url, (resp) => {
-            let data = '';
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
-            resp.on('end', () => {
-                resolve(data);
-            });
-        }).on("error", (err) => {
-            reject(err);
-        });
-    });
-};
 function removeCaller(msg, caller = '') {
     caller_log = caller.length ? ' [' + caller + '] ' : '';
     msg.delete(300).then(msg => console.log(`${caller} Auto-deleted message from ${msg.author.username}`));
