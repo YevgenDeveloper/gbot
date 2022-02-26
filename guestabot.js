@@ -7,12 +7,12 @@ const client = new Discord.Client();
 const {JSDOM} = jsdom;
 var prefix = config.prefix;
 var prefixSize = prefix.length;
-var admin_role_name = config.admin_role_name
+var admin_role_name = config.admin_role_name;
 var risibank_show_tags = config.show_risitags;
 var risibank_celestin = config.celestin;
 var bot_presence = config.bot_presence;
-var bot_presence_luck = config.bot_presence_luck
-var risicount = 0;
+var bot_presence_luck = config.bot_presence_luck;
+var risicount = config.bot_presence_luck;
 client.on('ready', () => {
     console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
@@ -47,20 +47,21 @@ client.on('message', async msg => {
     if (config.debug && msg.author.id != config.root_user) {
         return;
     }
-    let command = isCommand(msg.content);
+    const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift();
     if (command) {
         if (command.startsWith('ping')) {
             msg.reply('Pong!');
         }
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
             risicount++;
-            let params = command.slice(prefixSize + 8);
-            if (command.startsWith('risitas')) {
-                params = command.slice(prefixSize + 7);
-            }
+            let params = args.join(' ');
             removeCaller(msg, 'risibank');
             let search = rb.searchStickers(params);
             search.then(function (data) {
+                if(args.length > 5) {
+                    msg.reply("Je te conseil de pas envoyer plus de 5 mots clés :wink:");
+                }
                 if (data[Object.keys(data)[0]] == undefined) {
                     msg.reply("J'ai pas trouvé de de sticker correspondant à " + params, {
                         file: 'http:
@@ -68,14 +69,14 @@ client.on('message', async msg => {
                 } else {
                     if (risibank_celestin) {
                         msg.reply('demande a afficher ' + params + ' ... #BalanceTonCelestin', {
-                            file: data[Object.keys(data)[0]].risibank_link
+                            file: data[getRandomInt(0, data.length)].risibank_link
                         });
                     } else {
                         if (!risibank_show_tags) {
                             params = '';
                         }
                         msg.channel.send('' + params, {
-                            file: data[Object.keys(data)[0]].risibank_link
+                            file: data[getRandomInt(0, data.length)].risibank_link
                         });
                     }
                 }
@@ -146,26 +147,24 @@ client.on('message', async msg => {
             }
         }
         if (command.startsWith('PRESENCE') && no_access(msg)) {
-            let param = command.slice(prefixSize + 8).toLowerCase();
-            if (param.length < 1) {
+            if (args.length < 1) {
                 msg.reply(`La présence du bot est réglée sur ${bot_presence} <${bot_presence_luck}>`);
                 return;
             }
             let options = ["on", "off"];
-            if (options.indexOf(param) !== -1 || param.startsWith("rng")) {
-                if (param.startsWith("rng")) {
+            if (options.indexOf(args[0]) !== -1 || args[0] === 'rng') {
+                if (args[0] === 'rng') {
                     bot_presence = 'rng';
-                    let subparam = +param.slice(4);
-                    bot_presence_luck = subparam;
+                    bot_presence_luck = +args[1];
                     msg.reply(`La CHANCE du bot est à présent réglée sur ${bot_presence} <${bot_presence_luck}>`);
-                } else if (param === 'on') {
-                    bot_presence = param;
-                    msg.reply(`La présence du bot est à présent réglée sur ${param}`);
+                } else if (args[0] === 'on') {
+                    bot_presence = args[0];
+                    msg.reply(`La présence du bot est à présent réglée sur ${bot_presence}`);
                 } else {
-                    msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${param}\` n'en fait pas parti ...`);
+                    msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${args[0]}\` n'en fait pas parti ...`);
                 }
             } else {
-                msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${param}\` n'en fait pas parti ...`);
+                msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${args[0]}\` n'en fait pas parti ...`);
             }
         }
         if (command.startsWith('CELESTIN') && no_access(msg)) {
@@ -176,12 +175,6 @@ client.on('message', async msg => {
                 risibank_celestin = true;
                 msg.channel.send("Ok, c'est parti pour afficher les Celestins :ok_hand: :grin:");
             }
-        }
-        if(command.startsWith('SETSTATS') && no_access(msg)) {
-            if(risicount == 0)
-            var param = +command.slice(prefixSize + 8);
-            risicount = param;
-            msg.reply("Ok :ok_hand: :grin:");
         }
         if(command.startsWith('ALED') && no_access(msg)) {
             const embed = {
@@ -234,11 +227,9 @@ client.on('message', async msg => {
             msg.channel.send({ embed });
         }
         if (command.startsWith('SETPREFIX') && no_access(msg)) {
-            params = command.slice(prefixSize + 9);
-            prefix = params;
+            prefix = args[0];
             prefixSize = prefix.length;
-            msg.reply('New prefix setted. Is now ' + prefix);
-            console.log('prefix updated');
+            msg.reply('Le nouveau préfixe est ' + prefix);
         }
         if (command.startsWith('LEGANGE') && no_access(msg)) {
             removeCaller(msg, 'LEGANGE');
@@ -254,18 +245,22 @@ client.on('message', async msg => {
                 }
             );
         }
+        if(command.startsWith('SAVECONFIG') && has_root_access(msg)) {
+            removeCaller(msg, 'SAVECONFIG');
+            config.prefix = prefix;
+            prefix.length = prefixSize;
+            config.admin_role_name = admin_role_name;
+            config.show_risitags = risibank_show_tags;
+            config.celestin = risibank_celestin;
+            config.bot_presence = bot_presence;
+            config.bot_presence_luck = bot_presence_luck;
+            config.risicount = risicount;
+            const fs = require("fs")
+            fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);
+        }
     }
 });
 client.login(config.token);
-function isCommand(msg) {
-    prefixSize = prefix.length;
-    candidat = msg.substr(0, prefixSize);
-    if (candidat === prefix) {
-        command = msg.slice(prefixSize);
-        return command;
-    }
-    return false;
-}
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -275,6 +270,9 @@ function no_access(msg) {
         return false;
     }
     return true;
+}
+function has_root_access(msg) {
+    return msg.author.id === config.root_user;
 }
 function removeCaller(msg, caller = '') {
     caller_log = caller.length ? ' [' + caller + '] ' : '';
