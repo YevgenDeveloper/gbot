@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 const Risibank = require('risibank');
 const jsdom = require("jsdom");
+const DBL = require("dblapi.js");
 const config = require("./config.json");
 var rb = new Risibank.RisiBank();
 const client = new Discord.Client();
+const dbl = new DBL(config.dblapi_apikey, client);
 const {JSDOM} = jsdom;
 var prefix = config.prefix;
 var prefixSize = prefix.length;
@@ -30,14 +32,12 @@ client.on('message', async msg => {
     var troll_bot_idx = msg.content.indexOf("bot");
     var troll_answers = ["Hmm ? Ça parle de moi ?", "T'as un soucis a parler de moi ? Tu veux que j'appelle Shlomo ?", "Trouve toi un pote frère, arrête de me citer comme ça..."];
     if (troll_bot_idx > 0) {
-        console.log('troll');
         if (bot_presence != "off") {
             var rng = getRandomInt(0, 100);
             if (bot_presence == "on") {
                 msg.reply(troll_answers[Math.floor(Math.random() * troll_answers.length)]);
             } else {
                 if (rng >= (100 - bot_presence_luck)) {
-                    console.log('sent');
                     msg.reply(troll_answers[Math.floor(Math.random() * troll_answers.length)]);
                 }
             }
@@ -54,6 +54,9 @@ client.on('message', async msg => {
             msg.reply('Pong!');
         }
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
+            if(!forceVote(msg)) {
+                return;
+            }
             risicount++;
             let params = args.join(' ');
             removeCaller(msg, 'risibank');
@@ -274,7 +277,14 @@ function no_access(msg) {
 function has_root_access(msg) {
     return msg.author.id === config.root_user;
 }
-function removeCaller(msg, caller = '') {
+function removeCaller(msg, caller = '', timer = 300) {
     caller_log = caller.length ? ' [' + caller + '] ' : '';
-    msg.delete(300).then(msg => console.log(`${caller} Auto-deleted message from ${msg.author.username}`));
+    msg.delete(timer);
+}
+function forceVote(msg) {
+    if(dbl.hasVoted(msg.author.id)) {
+        return true;
+    } else {
+        msg.reply(`Merci de nous aider en allant [voter ici](https:
+    }
 }
