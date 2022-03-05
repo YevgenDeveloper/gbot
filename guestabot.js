@@ -59,7 +59,7 @@ client.on('message', async msg => {
             }
             risicount++;
             let params = args.join(' ');
-            removeCaller(msg, 'risibank');
+            removeCaller(msg);
             let search = rb.searchStickers(params);
             search.then(function (data) {
                 if(args.length > 5) {
@@ -235,7 +235,7 @@ client.on('message', async msg => {
             msg.reply('Le nouveau préfixe est ' + prefix);
         }
         if (command.startsWith('LEGANGE') && no_access(msg)) {
-            removeCaller(msg, 'LEGANGE');
+            removeCaller(msg);
             var n = 0;
             while (n < config.gange_lines) {
                 const fetched = await msg.channel.fetchMessages({limit: 100});
@@ -249,7 +249,7 @@ client.on('message', async msg => {
             );
         }
         if(command.startsWith('SAVECONFIG') && has_root_access(msg)) {
-            removeCaller(msg, 'SAVECONFIG');
+            removeCaller(msg);
             config.prefix = prefix;
             prefix.length = prefixSize;
             config.admin_role_name = admin_role_name;
@@ -277,8 +277,7 @@ function no_access(msg) {
 function has_root_access(msg) {
     return msg.author.id === config.root_user;
 }
-function removeCaller(msg, caller = '', timer = 300) {
-    caller_log = caller.length ? ' [' + caller + '] ' : '';
+function removeCaller(msg, timer = 300) {
     msg.delete(timer);
 }
 function forceVote(msg) {
@@ -286,5 +285,7 @@ function forceVote(msg) {
         return true;
     } else {
         msg.reply(`Merci de nous aider en allant [voter ici](https:
+            {"file": "http:
+        );
     }
 }
