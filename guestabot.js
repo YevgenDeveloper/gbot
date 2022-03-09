@@ -54,9 +54,14 @@ client.on('message', async msg => {
             msg.reply('Pong!');
         }
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
-            if(!forceVote(msg)) {
-                return;
-            }
+            dbl.hasVoted(msg.author.id).then(data => {
+                if(data === false) {
+                    msg.reply(`Merci de nous aider en allant voter mon khey (https:
+                        {"file": "http:
+                    );
+                    return;
+                }
+            })
             risicount++;
             let params = args.join(' ');
             removeCaller(msg);
@@ -279,13 +284,4 @@ function has_root_access(msg) {
 }
 function removeCaller(msg, timer = 300) {
     msg.delete(timer);
-}
-function forceVote(msg) {
-    if(dbl.hasVoted(msg.author.id)) {
-        return true;
-    } else {
-        msg.reply(`Merci de nous aider en allant [voter ici](https:
-            {"file": "http:
-        );
-    }
 }
