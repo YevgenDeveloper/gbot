@@ -53,6 +53,13 @@ client.on('message', async msg => {
         if (command.startsWith('ping')) {
             msg.reply('Pong!');
         }
+        if (command.startsWith('support')) {
+            msg.reply(`Toute demande d'aide ou problème passe par un ticket sur le site https:
+                {"file": "http:
+        }
+        if(command.startsWith('vote')) {
+            msg.reply(`Merci de participer mon Kheyou, tu peux voter là https:
+        }
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
             dbl.hasVoted(msg.author.id).then(data => {
                 if(data === false) {
@@ -112,7 +119,7 @@ client.on('message', async msg => {
                         "value": "\u200b"
                     },
                     {
-                        "name": "risibank <mot clé>",
+                        "name": "risibank <mot clé> (requiert de voter)",
                         "value": "Recherche dans la risibank et retourne un résultat parmis les <mot clés> indiqués !"
                     },
                     {
@@ -122,6 +129,14 @@ client.on('message', async msg => {
                     {
                         "name": "invite",
                         "value": "Permet d'inviter Gilbot sur votre propre discord, la CHANCE !"
+                    },
+                    {
+                        "name": "vote",
+                        "value": "Permet d'obtenir l'adresse de vote pour le bot :muscle: !"
+                    },
+                    {
+                        "name": "support",
+                        "value": "Si tu as un besoin d'aide, viens faire un tour :smile:"
                     },
                     {
                         "name": "credits",
