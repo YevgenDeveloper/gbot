@@ -14,7 +14,7 @@ var risibank_show_tags = config.show_risitags;
 var risibank_celestin = config.celestin;
 var bot_presence = config.bot_presence;
 var bot_presence_luck = config.bot_presence_luck;
-var risicount = config.bot_presence_luck;
+var risicount = config.risicount;
 client.on('ready', () => {
     console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
