@@ -63,7 +63,7 @@ client.on('message', async msg => {
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
             dbl.hasVoted(msg.author.id).then(data => {
                 if(data === false) {
-                    msg.reply(`Merci de nous aider en allant voter mon khey (https:
+                    msg.author.sendMessage(`Merci de nous aider en allant voter mon khey (https:
                         {"file": "http:
                     );
                     return;
@@ -75,7 +75,7 @@ client.on('message', async msg => {
             let search = rb.searchStickers(params);
             search.then(function (data) {
                 if(args.length > 5) {
-                    msg.reply("Je te conseil de pas envoyer plus de 5 mots clés :wink:");
+                    msg.author.sendMessage("Je te conseil de pas envoyer plus de 5 mots clés :wink:")
                 }
                 if (data[Object.keys(data)[0]] == undefined) {
                     msg.reply("J'ai pas trouvé de de sticker correspondant à " + params, {
@@ -152,7 +152,7 @@ client.on('message', async msg => {
         }
         if (command.startsWith("credits")) {
             msg.channel.send("Merci à la risibank (https:
-            msg.channel.send("Dev par poneygenial avec les encouragements de Ourx");
+            msg.channel.send("Dev par Benftwc/poneygenial avec les encouragements de Ourx");
         }
         if (command.startsWith('stats')) {
             msg.reply(`Depuis mon reboot, j'ai déjà envoyé ${risicount} stickers :joy:`);
