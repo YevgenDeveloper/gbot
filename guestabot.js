@@ -83,7 +83,7 @@ client.on('message', async msg => {
                     });
                 } else {
                     if (risibank_celestin) {
-                        msg.reply('demande a afficher ' + params + ' ... #BalanceTonCelestin', {
+                        msg.reply('', {
                             file: data[getRandomInt(0, data.length)].risibank_link
                         });
                     } else {
