@@ -120,7 +120,7 @@ client.on('message', async msg => {
                     },
                     {
                         "name": "risibank `mot clé` (requiert de voter)",
-                        "value": "Recherche dans la risibank et retourne un résultat parmis les <mot clés> indiqués !"
+                        "value": "Recherche dans la risibank et retourne un résultat parmis les `mot clés` indiqués !"
                     },
                     {
                         "name": "stats",
