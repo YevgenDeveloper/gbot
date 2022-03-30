@@ -43,6 +43,14 @@ client.on('message', async msg => {
             }
         }
     }
+    if (msg.channel.name === config.welcome_chan) {
+        removeCaller(msg, 100);
+        if(msg.content.startsWith("ACCEPT")) {
+            console.log(msg.author.name + " accepted");
+            msg.member.addRole(msg.guild.roles.find("name", "Membre")).catch(console.error);
+            msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
+        }
+    }
     if (msg.content.indexOf(config.prefix) !== 0) return;
     if (config.debug && msg.author.id != config.root_user) {
         return;
@@ -168,6 +176,10 @@ client.on('message', async msg => {
                 risibank_show_tags = true;
                 msg.channel.send("Ok, si t'assumes d'afficher tout tes tags chelous sur la risibank :ok_hand: :grin:");
             }
+        }
+        if (command.startsWith('WELCOMECHAN') && no_access(msg)) {
+            config.welcome_chan = args[0];
+            msg.channel.send(`Nouveau channel d'accueil : ${config.welcome_chan}`);
         }
         if (command.startsWith('PRESENCE') && no_access(msg)) {
             if (args.length < 1) {
