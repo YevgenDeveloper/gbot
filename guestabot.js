@@ -98,9 +98,15 @@ client.on('message', async msg => {
                         if (!risibank_show_tags) {
                             params = '';
                         }
-                        msg.channel.send('' + params, {
-                            file: data[getRandomInt(0, data.length)].risibank_link
-                        });
+                        if(command.startsWith('risitas')) {
+                            msg.channel.send('' + params, {
+                                file: data[getRandomInt(0, data.length)].risibank_link
+                            });
+                        } else {
+                            msg.channel.send('' + params, {
+                                file: data[Object.keys(data)[0]].risibank_link
+                            });
+                        }
                     }
                 }
             })
