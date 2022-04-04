@@ -45,7 +45,7 @@ client.on('message', async msg => {
     }
     if (msg.channel.name === config.welcome_chan) {
         removeCaller(msg, 100);
-        if(msg.content.startsWith("OK")) {
+        if(msg.content.startsWith("OK") || msg.content.startsWith("ACCEPT") || msg.content.startsWith("ok") || msg.content.startsWith("accept")) {
             console.log(msg.author.name + " accepted");
             msg.member.addRole(msg.guild.roles.find("name", "Membre")).catch(console.error);
             msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
