@@ -1,14 +1,16 @@
 {
-  "name": "guestabotjs",
+  "name": "Gilbot",
   "version": "1.0.0",
   "description": "Discord bot with funny commands",
   "main": "guestabot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [
     "guestabot",
-    "discord"
+    "discord",
+    "gilbot"
   ],
   "author": "Benjamin \"Benftwc\" <benftwc@gmail.com>",
   "license": "WTFPL",

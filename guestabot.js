@@ -45,7 +45,7 @@ client.on('message', async msg => {
     }
     if (msg.channel.name === config.welcome_chan) {
         removeCaller(msg, 100);
-        if(msg.content.startsWith("OK") || msg.content.startsWith("ACCEPT") || msg.content.startsWith("ok") || msg.content.startsWith("accept")) {
+        if(msg.content.startsWith("OK")) {
             console.log(msg.author.name + " accepted");
             msg.member.addRole(msg.guild.roles.find("name", "Membre")).catch(console.error);
             msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
@@ -98,15 +98,9 @@ client.on('message', async msg => {
                         if (!risibank_show_tags) {
                             params = '';
                         }
-                        if(command.startsWith('risitas')) {
-                            msg.channel.send('' + params, {
-                                file: data[getRandomInt(0, data.length)].risibank_link
-                            });
-                        } else {
-                            msg.channel.send('' + params, {
-                                file: data[Object.keys(data)[0]].risibank_link
-                            });
-                        }
+                        msg.channel.send('' + params, {
+                            file: data[getRandomInt(0, data.length)].risibank_link
+                        });
                     }
                 }
             })
