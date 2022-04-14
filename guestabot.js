@@ -46,7 +46,7 @@ client.on('message', async msg => {
     if (msg.channel.name === config.welcome_chan) {
         removeCaller(msg, 100);
         let call = msg.content.toLowerCase();
-        if(call.startsWith("ok") || call.startsWith("accept")) {
+        if (call.startsWith("ok") || call.startsWith("accept")) {
             console.log(msg.author.name + " accepted");
             msg.member.addRole(msg.guild.roles.find("name", "Membre")).catch(console.error);
             msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
@@ -66,24 +66,26 @@ client.on('message', async msg => {
             msg.reply(`Toute demande d'aide ou problème passe par un ticket sur le site https:
                 {"file": "http:
         }
-        if(command.startsWith('vote')) {
+        if (command.startsWith('vote')) {
             msg.reply(`Merci de participer mon Kheyou, tu peux voter là https:
         }
         if (command.startsWith('risibank') || command.startsWith('risitas')) {
-            dbl.hasVoted(msg.author.id).then(data => {
-                if(data === false) {
-                    msg.author.sendMessage(`Merci de nous aider en allant voter mon khey (https:
-                        {"file": "http:
-                    );
-                    return;
-                }
-            })
+            if (config.vote) {
+                dbl.hasVoted(msg.author.id).then(data => {
+                    if (data === false) {
+                        msg.author.sendMessage(`Merci de nous aider en allant voter mon khey (https:
+                            {"file": "http:
+                        );
+                        return;
+                    }
+                })
+            }
             risicount++;
             let params = args.join(' ');
             removeCaller(msg);
             let search = rb.searchStickers(params);
             search.then(function (data) {
-                if(args.length > 5) {
+                if (args.length > 5) {
                     msg.author.sendMessage("Je te conseil de pas envoyer plus de 5 mots clés :wink:")
                 }
                 if (data[Object.keys(data)[0]] == undefined) {
@@ -99,7 +101,7 @@ client.on('message', async msg => {
                         if (!risibank_show_tags) {
                             params = '';
                         }
-                        if(command.startsWith('risitas')) {
+                        if (command.startsWith('risitas')) {
                             msg.channel.send('' + params, {
                                 file: data[getRandomInt(0, data.length)].risibank_link
                             });
@@ -112,7 +114,7 @@ client.on('message', async msg => {
                 }
             })
         }
-        if(command.startsWith('invite')) {
+        if (command.startsWith('invite')) {
             msg.reply(`tu peux ajouter Gilbot chez toi en cliquant sur http:
                 {file: "http:
             );
@@ -163,7 +165,7 @@ client.on('message', async msg => {
                     }
                 ]
             };
-            msg.channel.send({ embed });
+            msg.channel.send({embed});
         }
         if (command.startsWith("credits")) {
             msg.channel.send("Merci à la risibank (https:
@@ -172,8 +174,8 @@ client.on('message', async msg => {
         if (command.startsWith('stats')) {
             msg.reply(`Depuis mon reboot, j'ai déjà envoyé ${risicount} stickers :joy:`);
             msg.reply(`J'offre actuellement du bonheur à ${client.users.size} personnes a travers ${client.channels.size} channels de ${client.guilds.size} serveurs. Ouf hein ?! Merci !!`,
-                    {file: "http:
-                );
+                {file: "http:
+            );
         }
         if (command.startsWith('RISITAGS') && no_access(msg)) {
             if (risibank_show_tags) {
@@ -187,6 +189,17 @@ client.on('message', async msg => {
         if (command.startsWith('WELCOMECHAN') && no_access(msg)) {
             config.welcome_chan = args[0];
             msg.channel.send(`Nouveau channel d'accueil : ${config.welcome_chan}`);
+        }
+        if (command.startsWith('VOTE') && no_access(msg)) {
+            let mode = '';
+            if (config.vote) {
+                config.vote = false;
+                mode = 'off';
+            } else {
+                config.vote = true;
+                mode = 'on';
+            }
+            msg.channel.send(`Les votes sont a présent : ${mode}`);
         }
         if (command.startsWith('PRESENCE') && no_access(msg)) {
             if (args.length < 1) {
@@ -218,7 +231,7 @@ client.on('message', async msg => {
                 msg.channel.send("Ok, c'est parti pour afficher les Celestins :ok_hand: :grin:");
             }
         }
-        if(command.startsWith('ALED') && no_access(msg)) {
+        if (command.startsWith('ALED') && no_access(msg)) {
             const embed = {
                 "title": "**ALEEEED ADMIN VERSOIN**",
                 "color": 16711680,
@@ -266,7 +279,7 @@ client.on('message', async msg => {
                     }
                 ]
             };
-            msg.channel.send({ embed });
+            msg.channel.send({embed});
         }
         if (command.startsWith('SETPREFIX') && no_access(msg)) {
             prefix = args[0];
@@ -287,7 +300,7 @@ client.on('message', async msg => {
                 }
             );
         }
-        if(command.startsWith('SAVECONFIG') && has_root_access(msg)) {
+        if (command.startsWith('SAVECONFIG') && has_root_access(msg)) {
             removeCaller(msg);
             config.prefix = prefix;
             prefix.length = prefixSize;
