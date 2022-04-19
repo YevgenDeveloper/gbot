@@ -20,5 +20,16 @@
     "jsdom": "^11.12.0",
     "risibank": "^1.0.1",
     "url-exists": "^1.0.3"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/benftwc/guestabot/issues"
+  },
+  "homepage": "https://discordbots.org/bot/484127854326710300",
+  "engines": {
+    "node": "10.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/benftwc/guestabot.git"
   }
 }

@@ -292,6 +292,11 @@ client.on('message', async msg => {
             };
             msg.channel.send({embed});
         }
+        if (command.startsWith('STATS') && no_access(msg)) {
+            if(args[0] != undefined) {
+                let guild = client.guilds.find("name", args[0]);
+            }
+        }
         if (command.startsWith('SETPREFIX') && no_access(msg)) {
             prefix = args[0];
             prefixSize = prefix.length;
