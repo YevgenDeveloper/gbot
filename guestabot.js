@@ -70,6 +70,7 @@ client.on('message', async msg => {
             msg.reply(`Merci de participer mon Kheyou, tu peux voter là https:
         }
         if (command.startsWith('don')) {
+            removeCaller(msg, 1);
             let amount = '';
             if(args[0] != undefined && +args[0] > 0) {
                 amount = args[0];
