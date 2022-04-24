@@ -123,9 +123,8 @@ client.on('message', async msg => {
             })
         }
         if (command.startsWith('invite')) {
+            removeCaller(msg);
             msg.author.sendMessage(`tu peux ajouter Gilbot chez toi en cliquant sur https:
-                {file: "http:
-            );
         }
         if (command.startsWith('help') || command.startsWith('aled')) {
             const embed = {
