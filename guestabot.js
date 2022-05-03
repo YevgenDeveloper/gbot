@@ -28,7 +28,7 @@ client.on("guildDelete", guild => {
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
 });
 client.on('guildMemberAdd', member => {
-  const role = member.guild.channels.roles.find("name", "Membre");
+  const role = member.guild.channels.roles.find("name", "nouveau");
   member.addRole(role).catch(console.error);
 });
 client.on('message', async msg => {
