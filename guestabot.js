@@ -52,7 +52,7 @@ client.on('message', async msg => {
         let call = msg.content.toLowerCase();
         if (call.startsWith("ok") || call.startsWith("accept")) {
             console.log(msg.member.name + " accepted");
-            msg.member.addRole(msg.guild.roles.find("name", "Membre")).catch(console.error);
+            msg.member.addRole(msg.guild.roles.find("name", "invité")).catch(console.error);
             msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
         }
     }
