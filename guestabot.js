@@ -27,10 +27,6 @@ client.on("guildDelete", guild => {
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
 });
-client.on('guildMemberAdd', member => {
-  const role = member.guild.channels.roles.find("name", "nouveau");
-  member.addRole(role).catch(console.error);
-});
 client.on('message', async msg => {
     if (msg.author.bot) return;
     var troll_bot_idx = msg.content.indexOf("bot");
@@ -45,15 +41,6 @@ client.on('message', async msg => {
                     msg.reply(troll_answers[Math.floor(Math.random() * troll_answers.length)]);
                 }
             }
-        }
-    }
-    if (msg.channel.name === config.welcome_chan) {
-        removeCaller(msg, 100);
-        let call = msg.content.toLowerCase();
-        if (call.startsWith("ok") || call.startsWith("accept")) {
-            console.log(msg.member.name + " accepted");
-            msg.member.addRole(msg.guild.roles.find("name", "invité")).catch(console.error);
-            msg.member.removeRole(msg.guild.roles.find("name", "nouveau")).catch(console.error);
         }
     }
     if (msg.content.indexOf(config.prefix) !== 0) return;
@@ -200,10 +187,6 @@ client.on('message', async msg => {
                 risibank_show_tags = true;
                 msg.channel.send("Ok, si t'assumes d'afficher tout tes tags chelous sur la risibank :ok_hand: :grin:");
             }
-        }
-        if (command.startsWith('WELCOMECHAN') && no_access(msg)) {
-            config.welcome_chan = args[0];
-            msg.channel.send(`Nouveau channel d'accueil : ${config.welcome_chan}`);
         }
         if (command.startsWith('VOTE') && no_access(msg)) {
             let mode = '';
@@ -353,6 +336,6 @@ function no_access(msg) {
 function has_root_access(msg) {
     return msg.author.id === config.root_user;
 }
-function removeCaller(msg, timer = 300) {
+function removeCaller(msg, timer = 50) {
     msg.delete(timer);
 }
