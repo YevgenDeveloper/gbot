@@ -26,7 +26,7 @@ client.on("guildCreate", guild => {
 client.on("guildDelete", guild => {
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
-});
+}); 
 client.on('message', async msg => {
     if (msg.author.bot) return;
     var troll_bot_idx = msg.content.indexOf("bot");
