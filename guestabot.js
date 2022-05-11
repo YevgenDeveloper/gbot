@@ -134,8 +134,12 @@ client.on('message', async msg => {
                         "value": "\u200b"
                     },
                     {
-                        "name": "risibank `mot clé` (requiert de voter)",
-                        "value": "Recherche dans la risibank et retourne un résultat parmis les `mot clés` indiqués !"
+                        "name": "risibank `mot clé`",
+                        "value": "Recherche dans la risibank et retourne **le premier** résultat parmis les `mot clés` indiqués !"
+                    },
+                    {
+                        "name": "risitas `mot clé`",
+                        "value": "Recherche dans la risibank et retourne **n'importe quel** résultat parmis les `mot clés` indiqués !"
                     },
                     {
                         "name": "stats",
