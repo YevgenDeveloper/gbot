@@ -1,14 +1,3 @@
-const Discord = require('discord.js');
-const Risibank = require('risibank');
-const jsdom = require("jsdom");
-const DBL = require("dblapi.js");
-const config = require("./config.json");
-var rb = new Risibank.RisiBank();
-const client = new Discord.Client();
-const dbl = new DBL(config.dblapi_apikey, client);
-const {JSDOM} = jsdom;
-var prefix = config.prefix;
-var prefixSize = prefix.length;
 var admin_role_name = config.admin_role_name;
 var risibank_show_tags = config.show_risitags;
 var risibank_celestin = config.celestin;
@@ -19,46 +8,13 @@ client.on('ready', () => {
     console.log(`${client.user.tag} has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
 });
-client.on("guildCreate", guild => {
-    console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
-    client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
-});
 client.on("guildDelete", guild => {
     console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
     client.user.setActivity(`${prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
 }); 
 client.on('message', async msg => {
-    if (msg.author.bot) return;
-    var troll_bot_idx = msg.content.indexOf("bot");
-    var troll_answers = ["Hmm ? Ça parle de moi ?", "T'as un soucis a parler de moi ? Tu veux que j'appelle Shlomo ?", "Trouve toi un pote frère, arrête de me citer comme ça..."];
-    if (troll_bot_idx > 0) {
-        if (bot_presence != "off") {
-            var rng = getRandomInt(0, 100);
-            if (bot_presence == "on") {
-                msg.reply(troll_answers[Math.floor(Math.random() * troll_answers.length)]);
-            } else {
-                if (rng >= (100 - bot_presence_luck)) {
-                    msg.reply(troll_answers[Math.floor(Math.random() * troll_answers.length)]);
-                }
-            }
-        }
-    }
-    if (msg.content.indexOf(config.prefix) !== 0) return;
-    if (config.debug && msg.author.id != config.root_user) {
-        return;
-    }
-    const args = msg.content.slice(prefix.length).trim().split(/ +/g);
-    const command = args.shift();
     if (command) {
-        if (command.startsWith('ping')) {
-            msg.reply('Pong!');
-        }
-        if (command.startsWith('support')) {
-            msg.reply(`Toute demande d'aide ou problème passe par un ticket sur le site https:
-                {"file": "http:
-        }
         if (command.startsWith('vote')) {
-            msg.reply(`Merci de participer mon Kheyou, tu peux voter là https:
         }
         if (command.startsWith('don')) {
             removeCaller(msg, 1);
@@ -118,120 +74,6 @@ client.on('message', async msg => {
             msg.author.sendMessage(`tu peux ajouter Gilbot chez toi en cliquant sur https:
         }
         if (command.startsWith('help') || command.startsWith('aled')) {
-            const embed = {
-                "title": "**ALEEEED**",
-                "color": 16762368,
-                "footer": {
-                    "icon_url": "http:
-                    "text": "N'OUBLIE PAS, tu peux m'aider en allant voter"
-                },
-                "thumbnail": {
-                    "url": "http:
-                },
-                "fields": [
-                    {
-                        "name": `Actuellement, le préfix est ${prefix}, faut le savoir hein.`,
-                        "value": "\u200b"
-                    },
-                    {
-                        "name": "risibank `mot clé`",
-                        "value": "Recherche dans la risibank et retourne **le premier** résultat parmis les `mot clés` indiqués !"
-                    },
-                    {
-                        "name": "risitas `mot clé`",
-                        "value": "Recherche dans la risibank et retourne **n'importe quel** résultat parmis les `mot clés` indiqués !"
-                    },
-                    {
-                        "name": "stats",
-                        "value": "Indique les statistiques d'utilisation et d'installation de Gilbot"
-                    },
-                    {
-                        "name": "invite",
-                        "value": "Permet d'inviter Gilbot sur votre propre discord, la CHANCE !"
-                    },
-                    {
-                        "name": "vote",
-                        "value": "Permet d'obtenir l'adresse de vote pour le bot :muscle: !"
-                    },
-                    {
-                        "name": "support",
-                        "value": "Si tu as un besoin d'aide, viens faire un tour :smile:"
-                    },
-                    {
-                        "name": "don",
-                        "value": "Si tu as trop d'argent avec ton RSA et que tu souhaites contribuer aux frais du bot :smile:"
-                    },
-                    {
-                        "name": "credits",
-                        "value": "A ton avis du con :beers::beers::beers:"
-                    },
-                    {
-                        "name": "\u200b​",
-                        "value": "[**Voter**](https:
-                    }
-                ]
-            };
-            msg.channel.send({embed});
-        }
-        if (command.startsWith("credits")) {
-            msg.channel.send("Merci à la risibank (https:
-            msg.channel.send("Dev par Benftwc/poneygenial avec les encouragements de Ourx");
-        }
-        if (command.startsWith('stats')) {
-            msg.reply(`Depuis mon reboot, j'ai déjà envoyé ${risicount} stickers :joy:`);
-            msg.reply(`J'offre actuellement du bonheur à ${client.users.size} personnes a travers ${client.channels.size} channels de ${client.guilds.size} serveurs. Ouf hein ?! Merci !!`,
-                {file: "http:
-            );
-        }
-        if (command.startsWith('RISITAGS') && no_access(msg)) {
-            if (risibank_show_tags) {
-                risibank_show_tags = false;
-                msg.channel.send("Ok, j'arrête de t'afficher avec les tags chelous sur la risibank :ok_hand: :grin:");
-            } else {
-                risibank_show_tags = true;
-                msg.channel.send("Ok, si t'assumes d'afficher tout tes tags chelous sur la risibank :ok_hand: :grin:");
-            }
-        }
-        if (command.startsWith('VOTE') && no_access(msg)) {
-            let mode = '';
-            if (config.vote) {
-                config.vote = false;
-                mode = 'off';
-            } else {
-                config.vote = true;
-                mode = 'on';
-            }
-            msg.channel.send(`Les votes sont a présent : ${mode}`);
-        }
-        if (command.startsWith('PRESENCE') && no_access(msg)) {
-            if (args.length < 1) {
-                msg.reply(`La présence du bot est réglée sur ${bot_presence} <${bot_presence_luck}>`);
-                return;
-            }
-            let options = ["on", "off"];
-            if (options.indexOf(args[0]) !== -1 || args[0] === 'rng') {
-                if (args[0] === 'rng') {
-                    bot_presence = 'rng';
-                    bot_presence_luck = +args[1];
-                    msg.reply(`La CHANCE du bot est à présent réglée sur ${bot_presence} <${bot_presence_luck}>`);
-                } else if (args[0] === 'on') {
-                    bot_presence = args[0];
-                    msg.reply(`La présence du bot est à présent réglée sur ${bot_presence}`);
-                } else {
-                    msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${args[0]}\` n'en fait pas parti ...`);
-                }
-            } else {
-                msg.reply(`Wesh, t'es con ou quoi ? Y'a 3 options, ON, OFF et RNG. \`${args[0]}\` n'en fait pas parti ...`);
-            }
-        }
-        if (command.startsWith('CELESTIN') && no_access(msg)) {
-            if (risibank_celestin) {
-                risibank_celestin = false;
-                msg.channel.send("Ok, j'arrête d'afficher les Celestins :ok_hand: :grin:");
-            } else {
-                risibank_celestin = true;
-                msg.channel.send("Ok, c'est parti pour afficher les Celestins :ok_hand: :grin:");
-            }
         }
         if (command.startsWith('ALED') && no_access(msg)) {
             const embed = {
@@ -327,19 +169,3 @@ client.on('message', async msg => {
     }
 });
 client.login(config.token);
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-function no_access(msg) {
-    if (!msg.member.roles.some(r => [admin_role_name].includes(r.name))) {
-        msg.reply(":410: commande suicidée ! - Recommence et je te pète les jambes petit fdp.");
-        return false;
-    }
-    return true;
-}
-function has_root_access(msg) {
-    return msg.author.id === config.root_user;
-}
-function removeCaller(msg, timer = 50) {
-    msg.delete(timer);
-}
