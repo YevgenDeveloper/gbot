@@ -13,7 +13,7 @@ fs.readdir("./events/", (err, files) => {
         client.on(eventName, event.bind(null, client));
     });
 });
-const utils = require('./utils.js');
+const utils = require('./modules/utils.js');
 client.utils = utils;
 client.commands = new Enmap();
 fs.readdir("./commands/", (err, files) => {
