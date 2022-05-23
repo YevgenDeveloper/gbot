@@ -13,7 +13,9 @@ exports.run = (client, message, args) => {
             }
         })
     }
-    client.config.risicount++;
+    client.risicount.risicount++;
+    const fs = require("fs")
+    fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
     let params = args.join(' ');
     message.delete();
     let search = rb.searchStickers(params);
