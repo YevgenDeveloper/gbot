@@ -15,6 +15,7 @@ exports.run = (client, message, args) => {
     }
     client.config.risicount++;
     let params = args.join(' ');
+    params = params.replace('<', '').replace('>', '');
     message.delete();
     let search = rb.searchStickers(params);
     search.then(function (data) {
