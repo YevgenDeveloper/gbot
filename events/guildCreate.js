@@ -1,5 +1,5 @@
 module.exports = (client, guild) => {
-    client.user.setActivity(`${client.config.prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs`);
+    client.user.setActivity(`${client.config.prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs - http:
     const embed = {
         "title": `NOUVEAU SERVEUR (${guild.name})`,
         "color": 4886754,
