@@ -13,26 +13,14 @@ exports.run = (client, message, args) => {
             }
         })
     }
-    let params = args.join(' ');
-    params = params.replace('<', '').replace('>', '');
     const fs = require("fs")
     client.risicount++;
     fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
     message.delete();
-    let search = rb.searchStickers(params);
+    let search = rb.searchStickers("waifu");
     search.then(function (data) {
-        if (args.length > 5) {
-            message.author.sendMessage("Je te conseil de pas envoyer plus de 5 mots clés :wink:")
-        }
-        if (data[Object.keys(data)[0]] == undefined) {
-            message.reply("J'ai pas trouvé de de sticker correspondant à " + params, {
-                file: 'http:
-            });
-        } else {
-            if (!client.config.show_risitags) {
-                params = '';
-            }
-            message.channel.send('' + params, {
+        if (data[Object.keys(data)[0]] != undefined) {
+            message.channel.send('', {
                 file: data[client.utils.getRandomInt(0, data.length)].risibank_link
             });
         }

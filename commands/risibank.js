@@ -13,8 +13,8 @@ exports.run = (client, message, args) => {
             }
         })
     }
-    client.risicount.risicount++;
     const fs = require("fs")
+    client.risicount++;
     fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
     let params = args.join(' ');
     params = params.replace('<', '').replace('>', '');
