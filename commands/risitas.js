@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
     let params = args.join(' ');
     params = params.replace('<', '').replace('>', '');
     const fs = require("fs")
-    client.risicount++;
+    client.risicount.count++;
     fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
     message.delete();
     let search = rb.searchStickers(params);
