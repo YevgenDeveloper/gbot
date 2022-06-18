@@ -1,4 +1,5 @@
 exports.run = async (client, message) => {
+    message.delete();
     let cleanData = (str, blank) => {
         str = ""+str;
         let siz = str.length;
@@ -20,5 +21,5 @@ exports.run = async (client, message) => {
             "| " + guild.id + " | " + cleanData(guild.name, 30) + " | " + cleanData(guild.channels.size, 6) + " | " + cleanData(guild.roles.size, 6) + " | " + cleanData(guild.members.size, 8) + " |\n";
     });
     guildsTable += "+--------------------+--------------------------------+--------+--------+----------+\n";
-     message.channel.send("```\n" + guildsTable + "```", {});
+    message.channel.send("```\n" + guildsTable + "```", {});
 }
