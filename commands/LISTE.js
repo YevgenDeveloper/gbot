@@ -4,7 +4,7 @@ exports.run = async (client, message) => {
         str = ""+str;
         let siz = str.length;
         if(siz > blank) {
-            str = "" + substr(0, blank - 1) + "\u2026";
+            str = "" + str.substr(0, blank - 1) + "\u2026";
         } else {
             let bor = blank - siz;
             str = "" + str + ' '.repeat(bor);
