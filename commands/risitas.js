@@ -14,26 +14,58 @@ exports.run = (client, message, args) => {
         })
     }
     let params = args.join(' ');
-    params = params.replace('<', '').replace('>', '');
     const fs = require("fs")
     client.risicount.count++;
     fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
-    message.delete();
     let search = rb.searchStickers(params);
     search.then(function (data) {
         if (args.length > 5) {
             message.author.sendMessage("Je te conseil de pas envoyer plus de 5 mots clés :wink:")
         }
-        if (data[Object.keys(data)[0]] == undefined) {
-            message.reply("J'ai pas trouvé de de sticker correspondant à " + params, {
-                file: 'http:
-            });
+        let index = client.utils.getRandomInt(0, data.length);
+        if (data[Object.keys(data)[index]] == undefined) {
+            let search = rb.searchStickers(params);
+            search.then(function (data) {
+                let index = client.utils.getRandomInt(0, data.length);
+                if (data[Object.keys(data)[index]] == undefined) {
+                    let search = rb.searchStickers(params);
+                    search.then(function (data) {
+                        let index = client.utils.getRandomInt(0, data.length);
+                        if (data[Object.keys(data)[index]] == undefined) {
+                            let search = rb.searchStickers("issou");
+                            search.then(function (data) {
+                                if (data[Object.keys(data)[0]] == undefined) {
+                                    return;
+                                } else {
+                                    message.channel.send('', {
+                                        file: data[Object.keys(data)[0]].risibank_link
+                                    });
+                                }
+                            })
+                        } else {
+                            if (!client.config.show_risitags) {
+                                params = '';
+                            }
+                            message.channel.send('' + params, {
+                                file: data[index].risibank_link
+                            });
+                        }
+                    })
+                } else {
+                    if (!client.config.show_risitags) {
+                        params = '';
+                    }
+                    message.channel.send('' + params, {
+                        file: data[index].risibank_link
+                    });
+                }
+            })
         } else {
             if (!client.config.show_risitags) {
                 params = '';
             }
             message.channel.send('' + params, {
-                file: data[client.utils.getRandomInt(0, data.length)].risibank_link
+                file: data[index].risibank_link
             });
         }
     })
