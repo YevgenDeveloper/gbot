@@ -1,9 +1,9 @@
 exports.run = (client, message, args) => {
     const Risibank = require('risibank');
     const rb = new Risibank.RisiBank();
-    if (client.config.vote) {
+    if (client.guildConf.vote) {
         const DBL = require("dblapi.js");
-        const dbl = new DBL(config.dblapi_apikey, client);
+        const dbl = new DBL(client.config.dblapi_apikey, client);
         dbl.hasVoted(message.author.id).then(data => {
             if (data === false) {
                 message.author.sendMessage(`Merci de nous aider en allant voter mon khey (https:

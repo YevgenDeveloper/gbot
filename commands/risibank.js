@@ -1,9 +1,9 @@
 exports.run = (client, message, args) => {
     const Risibank = require('risibank');
     const rb = new Risibank.RisiBank();
-    if (client.config.vote) {
+    if (client.guildConf.vote) {
         const DBL = require("dblapi.js");
-        const dbl = new DBL(config.dblapi_apikey, client);
+        const dbl = new DBL(client.config.dblapi_apikey, client);
         dbl.hasVoted(message.author.id).then(data => {
             if (data === false) {
                 message.author.sendMessage(`Merci de nous aider en allant voter mon khey (https:
@@ -28,7 +28,7 @@ exports.run = (client, message, args) => {
                 file: 'http:
             });
         } else {
-            if (!client.config.show_risitags) {
+            if (!client.guildConf.show_risitags) {
                 params = '';
             }
             message.channel.send('' + params, {

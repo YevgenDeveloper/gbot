@@ -4,6 +4,21 @@ const fs = require("fs");
 const client = new Discord.Client();
 const config = require("./config.json");
 client.config = config;
+client.settings = new Enmap({
+    name: "settings",
+    fetchAll: false,
+    autoFetch: true,
+    cloneLevel: 'deep'
+});
+const defaultSettings = {
+    prefix: "+",
+    show_risitags: false,
+    vote: false,
+    modLogChannel: "mod-log",
+    modRole: "Moderator",
+    adminRole: "Administrator"
+};
+client.defaultSettings = defaultSettings;
 const risicount = require('./risicount.json');
 client.risicount = risicount;
 fs.readdir("./events/", (err, files) => {
@@ -26,6 +41,7 @@ fs.readdir("./commands/", (err, files) => {
         let commandName = file.split(".")[0];
         console.log(`Attempting to load command ${commandName}`);
         client.commands.set(commandName, props);
+    )
     });
 });
 client.login(config.token);
