@@ -41,7 +41,6 @@ fs.readdir("./commands/", (err, files) => {
         let commandName = file.split(".")[0];
         console.log(`Attempting to load command ${commandName}`);
         client.commands.set(commandName, props);
-    )
     });
 });
 client.login(config.token);
