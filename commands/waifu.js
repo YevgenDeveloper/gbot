@@ -1,7 +1,7 @@
 exports.run = (client, message, args) => {
     const Risibank = require('risibank');
     const rb = new Risibank.RisiBank();
-    if (client.guildConf.vote) {
+    if (!client.guildConf.disable_vote) {
         const DBL = require("dblapi.js");
         const dbl = new DBL(client.config.dblapi_apikey, client);
         dbl.hasVoted(message.author.id).then(data => {
