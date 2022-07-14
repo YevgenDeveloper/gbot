@@ -1,5 +1,6 @@
 module.exports = (client, message) => {
-    if (message.author.bot && !message.guild) return;
+    if (message.author.bot) return;
+    if (!message.guild) return;
     const guildConf = client.settings.ensure(message.guild.id, client.defaultSettings);
     client.guildConf = guildConf;
     if(!client.guildConf.hasOwnProperty('score')) {
