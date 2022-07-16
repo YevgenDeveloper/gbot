@@ -1,5 +1,5 @@
 module.exports = (client) => {
-    client.user.setActivity(`${client.config.prefix} - Propage la bonne parole sur ${client.guilds.size} serveurs - http:
+    client.user.setActivity(`http:
     const embed = {
         "title": "BOT READY",
         "color": 8311585,
