@@ -6,6 +6,9 @@ module.exports = (client, message) => {
     if(!client.guildConf.hasOwnProperty('score')) {
         client.guildConf.score = true;
     }
+    if(!client.guildConf.hasOwnProperty('nsfwOnly')) {
+        client.guildConf.nsfwOnly = true;
+    }
     if(!client.guildConf.hasOwnProperty('history')) {
         client.guildConf.history = 4;
     }
