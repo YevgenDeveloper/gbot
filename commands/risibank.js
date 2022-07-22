@@ -6,6 +6,10 @@ exports.run = (client, message, args) => {
     fs.writeFile("./risicount.json", JSON.stringify(client.risicount), (err) => console.error);
     let params = args.join(' ');
     message.delete();
+    if(!message.channel.nsfw && client.guildConf.nsfwOnly === "on") {
+        message.author.send(`Le salon \`#${message.channel.name}\` du serveur \`${message.guild.name}\` bloque les stickers dans les salons "non NSFW"`);
+        return;
+    }
     let search = rb.searchStickers(params);
     search.then(function (data) {
         if (args.length > 5) {
