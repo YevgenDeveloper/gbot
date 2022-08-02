@@ -6,5 +6,5 @@ exports.run = (client, message, args) => {
         points: 0,
         level: 1
     });
-    return message.channel.send(`Vous avez actuellement ${client.points.get(key, "points")} points et êtes au niveau ${client.points.get(key, "level")}! Continue à utiliser des Stickers !`);
+    return message.channel.send(`Vous êtes au niveau ${client.points.get(key, "level")} avec ${client.points.get(key, "xp")} EXP ! Continue de Sticker !`);
 }
