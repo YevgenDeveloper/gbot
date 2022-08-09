@@ -65,7 +65,7 @@ module.exports = (client, message) => {
             client.points.set(`${key}`, 0, 'level')
         }
         let newScoring = computeScore(client.points.get(`${key}`, 'xp') || 1);
-        const curLevel = newScoring.level;
+        const curLevel = newScoring.level; 
         if (curLevel > client.points.get(`${key}`, "level")) {
             message.reply(`A force de spam des stickers, t'es passé au niveau **${curLevel}**! `);
             client.points.set(`${key}`, curLevel, "level");
