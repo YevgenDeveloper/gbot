@@ -3,7 +3,7 @@ exports.run = (client, message, args) => {
     const sorted = filtered.sort((a, b) => b.points - a.points);
     const top10 = sorted.splice(0, 10);
     let embedFields = top10.map(data => {
-        return {"name": client.users.get(data.user).tag, "value": `${data.points} points || LVL: ${data.level} | XP: ${data.xp} || `};
+        return {"name": client.users.get(data.user).tag, "value": `${data.points || 0} points || LVL: ${data.level || 1} | XP: ${data.xp || 0} || `};
     });
     const embed = {
         "title": `LEADERBOARD (${message.guild.name})`,
