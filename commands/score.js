@@ -4,7 +4,8 @@ exports.run = (client, message, args) => {
         user: message.author.id,
         guild: message.guild.id,
         points: 0,
-        level: 1
+        level: 1,
+        xp: 0
     });
-    return message.channel.send(`Vous êtes au niveau ${client.points.get(key, "level")} avec ${client.points.get(key, "xp")} EXP ! Continue de Sticker !`);
+    return message.channel.send(`Vous êtes au niveau ${client.points.get(key, "level") || 1} avec ${client.points.get(key, "xp") || 0} EXP ! Continue de Sticker !`);
 }
