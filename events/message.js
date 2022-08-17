@@ -35,6 +35,12 @@ module.exports = (client, message) => {
     if (!client.guildConf.hasOwnProperty('nsfwOnly') || client.guildConf.nsfwOnly === undefined) {
         client.guildConf.nsfwOnly = "off";
     }
+    if (!client.guildConf.hasOwnProperty('annonces') || client.guildConf.annonces === undefined) {
+        client.guildConf.annonces = "on";
+    }
+    if (!client.guildConf.hasOwnProperty('annonces_chan') || client.guildConf.annonces_chan === undefined) {
+        client.guildConf.annonces_chan = "general";
+    }
     if (!client.guildConf.hasOwnProperty('history') || client.guildConf.history === undefined) {
         client.guildConf.history = 4;
     }
@@ -65,7 +71,7 @@ module.exports = (client, message) => {
             client.points.set(`${key}`, 0, 'level')
         }
         let newScoring = computeScore(client.points.get(`${key}`, 'xp') || 1);
-        const curLevel = newScoring.level; 
+        const curLevel = newScoring.level;
         if (curLevel > client.points.get(`${key}`, "level")) {
             message.reply(`A force de spam des stickers, t'es passé au niveau **${curLevel}**! `);
             client.points.set(`${key}`, curLevel, "level");
