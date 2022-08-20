@@ -2,8 +2,6 @@ module.exports = (client, message) => {
     if (message.author.bot) return;
     if (!message.guild) return;
     const computeScore = (score) => {
-        console.log("IN");
-        console.log(score);
         let levels = [], num = 1;
         levels[0] = {"level": 0, "xp": 0, "diff": 0};
         while (num < 200) {
@@ -23,8 +21,6 @@ module.exports = (client, message) => {
         const xpRange = {"min": 10, "max": 150};
         let currentXp = score + (Math.floor(Math.random() * (xpRange.max - xpRange.min + 1)) + xpRange.min);
         let scoring = {xp: currentXp, level: levels[levels.length-1].level};
-        console.log("OUT");
-        console.log(scoring);
         return scoring;
     }
     const guildConf = client.settings.ensure(message.guild.id, client.defaultSettings);

@@ -10,6 +10,5 @@ exports.run = (client, message, args) => {
         "color": 4886754,
         "fields": embedFields
     };
-    console.log(embedFields);
     return message.channel.send({embed});
 }
