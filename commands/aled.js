@@ -12,10 +12,6 @@ exports.run = (client, message, args) => {
         },
         "fields": [
             {
-                "name": `Actuellement, le préfix est ${client.config.prefix}, faut le savoir hein.`,
-                "value": "\u200b"
-            },
-            {
                 "name": "risibank `mot clé`",
                 "value": "Recherche dans la risibank et retourne **le premier** résultat parmis les `mot clés` indiqués !"
             },
@@ -46,6 +42,34 @@ exports.run = (client, message, args) => {
             {
                 "name": "credits",
                 "value": "A ton avis du con :beers::beers::beers:"
+            },
+            {
+                "name": "top",
+                "value": "Affiche les plus gros shitposteurs du serveur :smile:"
+            },
+            {
+                "name": "score",
+                "value": "Connaître son ranking"
+            },
+            {
+                "name": "waifu (commande 'premium')",
+                "value": ":smirk: :smirk:"
+            },
+            {
+                "name": "poucave (commande 'premium')",
+                "value": ":smirk: :smirk:"
+            },
+            {
+                "name": "LEGANGE (commande admin)",
+                "value": "Clean les messages sur 2 semaines"
+            },
+            {
+                "name": "PURGELEVEL (commande admin)",
+                "value": "Clean les ranks"
+            },
+            {
+                "name": "config (commande admin)",
+                "value": "Configure les options du discord"
             },
             {
                 "name": "\u200b​",
